@@ -1,6 +1,5 @@
 package com.phonebook.tests;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -11,7 +10,7 @@ public class AddContactTests extends TestBase{
     @BeforeMethod
     public void precondition(){
         clickOnLoginLink();
-        fillLoginRegisterForm("jenny.klein001@mail.de", "Aa12345!");
+        fillLoginRegisterForm(new User("jenny.klein001@mail.de", "Aa12345!"));
         clickOnLoginButton();
     }
 
@@ -20,7 +19,7 @@ public class AddContactTests extends TestBase{
         //click on Add link
         clickOnAddLink();
         fillContactForm("Oliver", "Koen", "12345567896", "test@gmail.com", "Hannover", "QA");
-    clickOnSaveButton();
+        clickOnSaveButton();
         //Assert -> by name
         Assert.assertTrue(isContactCreatedByText("Oliver"));
     }

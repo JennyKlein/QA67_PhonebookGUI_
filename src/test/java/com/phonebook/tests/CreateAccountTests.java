@@ -10,7 +10,7 @@ public class CreateAccountTests extends TestBase{
     public void newUserRegisterPositiveTest(){
        // int i = (int) ((System.currentTimeMillis()/1000)%3600); for HW
         clickOnLoginLink();
-        fillLoginRegisterForm("jenny.klein001@mail.de", "Aa12345!");
+        fillLoginRegisterForm(new User("jenny.klein001@mail.de", "Aa12345!"));
         clickOnRegistrationButton();
         Assert.assertTrue(isSignButtonPresent());
     }
@@ -18,7 +18,7 @@ public class CreateAccountTests extends TestBase{
     @Test
     public void existedUserRegisterNegativeTest(){
         clickOnLoginLink();
-        fillLoginRegisterForm("jenny.klein001@mail.de", "Aa12345!");
+        fillLoginRegisterForm(new User("jenny.klein001@mail.de", "Aa12345!"));
         clickOnRegistrationButton();
         Assert.assertTrue(isAlertPresent());
     }

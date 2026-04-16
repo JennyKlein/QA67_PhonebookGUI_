@@ -69,9 +69,9 @@ public class TestBase {
         click(By.name("registration"));
     }
 
-    public void fillLoginRegisterForm(String email, String password) {
-        type(By.name("email"), email);
-        type(By.name("password"), password);
+    public void fillLoginRegisterForm(User user) {
+        type(By.name("email"), user.email());
+        type(By.name("password"), user.password());
     }
 
     public void clickOnLoginLink() {
@@ -119,5 +119,20 @@ public class TestBase {
         click(By.cssSelector(".contact-item_card__2SOIM"));
         //click on Remove button
         click(By.xpath("//button[.='Remove']"));
+    }
+
+    public int sizeOfContacts() {
+        if (isElementPresent(By.cssSelector(".contact-item_card__2SOIM"))){
+            return driver.findElements(By.cssSelector(".contact-item_card__2SOIM")).size();
+        }
+        return 0;
+    }
+
+    public void pause(int millis){
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

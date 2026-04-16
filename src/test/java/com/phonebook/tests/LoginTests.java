@@ -8,7 +8,7 @@ public class LoginTests extends TestBase{
     @Test
     public void loginPositiveTest(){
         clickOnLoginLink();
-        fillLoginRegisterForm("jenny.klein001@mail.de", "Aa12345!");
+        fillLoginRegisterForm(new User("jenny.klein001@mail.de", "Aa12345!"));
         clickOnLoginButton();
         Assert.assertTrue(isSignButtonPresent());
 

@@ -55,9 +55,9 @@ public class AddContactTests extends TestBase{
     @AfterMethod
     public void postConditions(){
         //click on card
-        click(By.cssSelector(".contact-item_card__2S0IM"));
+        click(By.cssSelector(".contact-item_card__2SOIM"));
 
         //click on Remove button
-        click(By.xpath("//button[-='Remove']"));
+        click(By.xpath("//button[.='Remove']"));
     }
 }

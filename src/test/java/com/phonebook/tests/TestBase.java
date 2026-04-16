@@ -4,6 +4,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -11,6 +12,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import java.time.Duration;
+import java.util.List;
 
 public class TestBase {
     WebDriver driver;
@@ -57,5 +59,65 @@ public class TestBase {
             return true;
         }
 
+    }
+
+    public boolean isSignButtonPresent() {
+        return isElementPresent(By.xpath("//button[.='Sign Out']"));
+    }
+
+    public void clickOnRegistrationButton() {
+        click(By.name("registration"));
+    }
+
+    public void fillLoginRegisterForm(String email, String password) {
+        type(By.name("email"), email);
+        type(By.name("password"), password);
+    }
+
+    public void clickOnLoginLink() {
+        click(By.cssSelector("[href='/login']"));
+    }
+
+    public void clickOnLoginButton() {
+        click(By.name("login"));
+    }
+
+    public void clickOnSaveButton() {
+        click(By.cssSelector(".add_form__2rsm2 button"));
+    }
+
+    public void fillContactForm(String name, String lastname, String phone, String email, String address, String description) {
+        type(By.xpath("//input[1]"), name);
+        //enter lastname
+        type(By.xpath("//input[2]"), lastname);
+        //enter phone
+        type(By.xpath("//input[3]"), phone);
+        //enter email
+        type(By.xpath("//input[4]"), email);
+        //enter address
+        type(By.xpath("//input[5]"), address);
+        //enter description
+        type(By.xpath("//input[6]"), description);
+        //click on Save button
+    }
+
+    public void clickOnAddLink() {
+        click(By.cssSelector("[href='/add']"));
+    }
+
+    public boolean isContactCreatedByText(String text) {
+        List<WebElement> contacts = driver.findElements(By.cssSelector("h2"));
+        for(WebElement element:contacts){
+            if(element.getText().contains(text))
+                return true;
+        }
+        return false;
+    }
+
+    public void removeContact() {
+        //click on card
+        click(By.cssSelector(".contact-item_card__2SOIM"));
+        //click on Remove button
+        click(By.xpath("//button[.='Remove']"));
     }
 }

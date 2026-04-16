@@ -11,7 +11,6 @@ public class LoginTests extends TestBase{
         //click on Login link
         click(By.cssSelector("[href='/login']"));
 
-
         //enter email
         type(By.name("email"), "jenny.klein001@mail.de");
 
@@ -19,10 +18,10 @@ public class LoginTests extends TestBase{
         type(By.name("password"), "Aa12345!");
 
         //click on Login button
-        click(By.name("registration"));
+        click(By.name("login"));
 
         //assert alert appears
-        Assert.assertTrue(isAlertPresent());
+        Assert.assertTrue(isElementPresent(By.xpath("//button[.='Sign Out']")));
 
     }
 }

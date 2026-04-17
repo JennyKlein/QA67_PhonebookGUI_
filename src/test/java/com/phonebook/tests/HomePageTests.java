@@ -9,7 +9,7 @@ public class HomePageTests extends TestBase {
     @Test
     public void isHomeComponentPresentTest(){
        // System.out.println("Home component is" + isHomeComponentPresent());
-        Assert.assertTrue(isHomeComponentPresent());
+        Assert.assertTrue(app.isHomeComponentPresent());
     }
 
 }

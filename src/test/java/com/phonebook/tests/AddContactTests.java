@@ -9,32 +9,32 @@ public class AddContactTests extends TestBase{
 
     @BeforeMethod
     public void precondition(){
-        clickOnLoginLink();
-        fillLoginRegisterForm(new User()
+        app.clickOnLoginLink();
+        app.fillLoginRegisterForm(new User()
                 .setEmail("jenny.klein001@mail.de")
                 .setPassword("Aa12345!"));
-        clickOnLoginButton();
+        app.clickOnLoginButton();
     }
 
     @Test
     public void adContactPositiveTest(){
         //click on Add link
-        clickOnAddLink();
-        fillContactForm(new Contact()
-                .setName("Oliver")
-                .setLastname("Koen")
-                .setPhone("12345567896")
-                .setEmail("test@gmail.com")
-                .setAddress("Hannover")
-                .setDescription("QA"));
-        clickOnSaveButton();
+        app.clickOnAddLink();
+        app.fillContactForm(new Contact()
+                .setName(ContactData.name)
+                .setLastname(ContactData.lastName)
+                .setPhone(ContactData.phone)
+                .setEmail(ContactData.email)
+                .setAddress(ContactData.address)
+                .setDescription(ContactData.description));
+        app.clickOnSaveButton();
         //Assert -> by name
-        Assert.assertTrue(isContactCreatedByText("Oliver"));
+        Assert.assertTrue(app.isContactCreatedByText(ContactData.name));
     }
 
     @AfterMethod
     public void postConditions(){
-        removeContact();
+        app.removeContact();
     }
 
 }

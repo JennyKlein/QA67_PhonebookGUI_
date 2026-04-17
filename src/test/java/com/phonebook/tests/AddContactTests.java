@@ -10,7 +10,9 @@ public class AddContactTests extends TestBase{
     @BeforeMethod
     public void precondition(){
         clickOnLoginLink();
-        fillLoginRegisterForm(new User("jenny.klein001@mail.de", "Aa12345!"));
+        fillLoginRegisterForm(new User()
+                .setEmail("jenny.klein001@mail.de")
+                .setPassword("Aa12345!"));
         clickOnLoginButton();
     }
 
@@ -18,7 +20,13 @@ public class AddContactTests extends TestBase{
     public void adContactPositiveTest(){
         //click on Add link
         clickOnAddLink();
-        fillContactForm("Oliver", "Koen", "12345567896", "test@gmail.com", "Hannover", "QA");
+        fillContactForm(new Contact()
+                .setName("Oliver")
+                .setLastname("Koen")
+                .setPhone("12345567896")
+                .setEmail("test@gmail.com")
+                .setAddress("Hannover")
+                .setDescription("QA"));
         clickOnSaveButton();
         //Assert -> by name
         Assert.assertTrue(isContactCreatedByText("Oliver"));

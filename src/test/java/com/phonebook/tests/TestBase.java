@@ -41,9 +41,11 @@ public class TestBase {
     }
 
     public void type(By locator, String text) {
-        click(locator);
-        driver.findElement(locator).clear();
-        driver.findElement(locator).sendKeys(text);
+        if(text!=null) {
+            click(locator);
+            driver.findElement(locator).clear();
+            driver.findElement(locator).sendKeys(text);
+        }
     }
 
     public void click(By locator) {
@@ -70,8 +72,8 @@ public class TestBase {
     }
 
     public void fillLoginRegisterForm(User user) {
-        type(By.name("email"), user.email());
-        type(By.name("password"), user.password());
+        type(By.name("email"), user.getEmail());
+        type(By.name("password"), user.getPassword());
     }
 
     public void clickOnLoginLink() {
@@ -86,18 +88,18 @@ public class TestBase {
         click(By.cssSelector(".add_form__2rsm2 button"));
     }
 
-    public void fillContactForm(String name, String lastname, String phone, String email, String address, String description) {
-        type(By.xpath("//input[1]"), name);
+    public void fillContactForm(Contact contact) {
+        type(By.xpath("//input[1]"), contact.getName());
         //enter lastname
-        type(By.xpath("//input[2]"), lastname);
+        type(By.xpath("//input[2]"), contact.getLastname());
         //enter phone
-        type(By.xpath("//input[3]"), phone);
+        type(By.xpath("//input[3]"), contact.getPhone());
         //enter email
-        type(By.xpath("//input[4]"), email);
+        type(By.xpath("//input[4]"), contact.getEmail());
         //enter address
-        type(By.xpath("//input[5]"), address);
+        type(By.xpath("//input[5]"), contact.getAddress());
         //enter description
-        type(By.xpath("//input[6]"), description);
+        type(By.xpath("//input[6]"), contact.getDescription());
         //click on Save button
     }
 
@@ -135,4 +137,5 @@ public class TestBase {
             throw new RuntimeException(e);
         }
     }
+
 }

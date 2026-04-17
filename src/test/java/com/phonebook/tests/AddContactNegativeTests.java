@@ -4,8 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class DeleteContactTests extends TestBase {
-
+public class AddContactNegativeTests extends TestBase{
     @BeforeMethod
     public void precondition() {
         clickOnLoginLink();
@@ -13,7 +12,10 @@ public class DeleteContactTests extends TestBase {
                 .setEmail("jenny.klein001@mail.de")
                 .setPassword("Aa12345!"));
         clickOnLoginButton();
+    }
 
+    @Test
+    public void addContactWithInvalidPhoneTest(){
         clickOnAddLink();
         fillContactForm(new Contact()
                 .setName("Oliver")
@@ -22,18 +24,7 @@ public class DeleteContactTests extends TestBase {
                 .setEmail("test@gmail.com")
                 .setAddress("Hannover")
                 .setDescription("QA"));
-
         clickOnSaveButton();
+        Assert.assertTrue(isAlertPresent());
     }
-
-    @Test
-    public void deleteContactTest(){
-        int sizeBefor = sizeOfContacts();
-        removeContact();
-        pause(500);
-            int sizeAfter = sizeOfContacts();
-            Assert.assertEquals(sizeAfter,sizeBefor-1);
-        }
-
 }
-

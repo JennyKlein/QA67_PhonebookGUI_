@@ -8,9 +8,22 @@ public class LoginTests extends TestBase{
     @Test
     public void loginPositiveTest(){
         clickOnLoginLink();
-        fillLoginRegisterForm(new User("jenny.klein001@mail.de", "Aa12345!"));
+        fillLoginRegisterForm(new User()
+                .setEmail(UserData.email)
+                .setPassword(UserData.password));
         clickOnLoginButton();
         Assert.assertTrue(isSignButtonPresent());
+
+    }
+
+    @Test
+    public void loginNegativeWithoutEmailTest(){
+
+        clickOnLoginLink();
+        fillLoginRegisterForm(new User()
+                .setPassword(UserData.password));
+        clickOnLoginButton();
+        Assert.assertTrue(isAlertPresent());
 
     }
 

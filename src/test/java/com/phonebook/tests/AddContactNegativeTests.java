@@ -1,30 +1,38 @@
 package com.phonebook.tests;
 
+import com.phonebook.core.TestBase;
+import com.phonebook.data.ContactData;
+import com.phonebook.data.UserData;
+import com.phonebook.models.Contact;
+import com.phonebook.models.User;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class AddContactNegativeTests extends TestBase{
+public class AddContactNegativeTests extends TestBase {
     @BeforeMethod
     public void precondition() {
-        app.clickOnLoginLink();
-        app.fillLoginRegisterForm(new User()
+        if (app.getUser().isLoginLinkPresent()){
+            app.getUser().clickOnSignOutButton();
+        }
+        app.getUser().clickOnLoginLink();
+        app.getUser().fillLoginRegisterForm(new User()
                 .setEmail(UserData.email)
                 .setPassword(UserData.password));
-        app.clickOnLoginButton();
+        app.getUser().clickOnLoginButton();
     }
 
     @Test
     public void addContactWithInvalidPhoneTest(){
-        app.clickOnAddLink();
-        app.fillContactForm(new Contact()
+        app.getContact().clickOnAddLink();
+        app.getContact().fillContactForm(new Contact()
                 .setName(ContactData.name)
                 .setLastname(ContactData.lastName)
                 .setPhone("234556789")
                 .setEmail(ContactData.email)
                 .setAddress(ContactData.address)
                 .setDescription(ContactData.description ));
-        app.clickOnSaveButton();
-        Assert.assertTrue(app.isAlertPresent());
+        app.getContact().clickOnSaveButton();
+        Assert.assertTrue(app.getContact().isAlertPresent());
     }
 }

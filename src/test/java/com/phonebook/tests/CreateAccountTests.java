@@ -7,6 +7,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.phonebook.core.ApplicationManager.softAssert;
+
 public class CreateAccountTests extends TestBase {
 
         @BeforeMethod
@@ -34,7 +36,10 @@ public class CreateAccountTests extends TestBase {
                 .setEmail(UserData.email)
                 .setPassword(UserData.password));
         app.getUser().clickOnRegistrationButton();
-        Assert.assertTrue(app.getUser().isAlertPresent());
+        //Assert.assertTrue(app.getUser().isAlertPresent());
+        softAssert.assertTrue(app.getUser().isAlertPresent());
+        softAssert.assertTrue(app.getUser().isErrorMessagePresent());
+        softAssert.assertAll();
     }
 
 }

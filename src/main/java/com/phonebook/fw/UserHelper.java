@@ -38,4 +38,8 @@ public class UserHelper extends BaseHelper {
     public void clickOnSignOutButton() {
         click(By.xpath("//button[.='Sign Out']"));
     }
+
+    public boolean isErrorMessagePresent() {
+        return isElementPresent(By.cssSelector(".login_login__3ЕНКВ>div"));
+    }
 }

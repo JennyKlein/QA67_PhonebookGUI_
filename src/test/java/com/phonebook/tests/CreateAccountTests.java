@@ -11,26 +11,28 @@ import static com.phonebook.core.ApplicationManager.softAssert;
 
 public class CreateAccountTests extends TestBase {
 
-        @BeforeMethod
-        public void ensurePrecondition(){
-            if (app.getUser().isLoginLinkPresent()){
-                app.getUser().clickOnSignOutButton();
-            }
+    @BeforeMethod
+    public void ensurePrecondition(){
+        if (!app.getUser().isLoginLinkPresent()){
+            app.getUser().clickOnSignOutButton();
         }
+    }
 
-    @Test (enabled = false)
-    public void newUserRegisterPositiveTest(){
-       // int i = (int) ((System.currentTimeMillis()/1000)%3600); for HW
+    @Test(enabled = false)
+    public void newUserRegisterPositiveTest() {
+
         app.getUser().clickOnLoginLink();
         app.getUser().fillLoginRegisterForm(new User()
                 .setEmail(UserData.email)
                 .setPassword(UserData.password));
         app.getUser().clickOnRegistrationButton();
         Assert.assertTrue(app.getUser().isSignButtonPresent());
+
     }
 
     @Test
-    public void existedUserRegisterNegativeTest(){
+    public void existedUserRegisterNegativeTest() {
+
         app.getUser().clickOnLoginLink();
         app.getUser().fillLoginRegisterForm(new User()
                 .setEmail(UserData.email)

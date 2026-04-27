@@ -10,43 +10,43 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 public class TestBase {
 
+
     protected static ApplicationManager app = new ApplicationManager(System.getProperty("browser", Browser.CHROME.browserName()));
 
-        Logger logger = LoggerFactory.getLogger(TestBase.class);
+    Logger logger = LoggerFactory.getLogger(TestBase.class);
+
 
     //@BeforeMethod
     @BeforeSuite
     public void setUp(){
         app.init();
 
+
     }
 
-   // @AfterMethod(enabled = true)
-    @AfterSuite
+    //@AfterMethod(enabled = true)
+    @AfterSuite(enabled = false)
     public void tearDown(){
-
         app.stop();
-
-         }
-
+    }
     @BeforeMethod
-    public void startTest(Method method){
-        logger.info("Start test{}", method.getName());
-            }
-
-     @AfterMethod
+    public void startTest(Method method,Object[] p){
+        logger.info("Start test {} with data: {}",method.getName(), Arrays.asList(p));
+    }
+    @AfterMethod
     public void stopTest(ITestResult result){
         if (result.isSuccess()){
             logger.info("PASSED: {}",result.getMethod().getMethodName());
-        }else{
+        }else {
             logger.error("FAILED: {}. Screenshot - > {}",result.getMethod().getMethodName(),
                     app.getUser().takeScreenshot());
         }
         logger.info("Stop test");
-        logger.info("*****************************************");
-            }
+        logger.info("**************************");
+    }
 
 }

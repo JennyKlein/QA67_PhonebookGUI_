@@ -10,29 +10,32 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class AddContactNegativeTests extends TestBase {
+
     @BeforeMethod
-    public void precondition() {
-        if (app.getUser().isLoginLinkPresent()){
+    public void precondition(){
+        if (!app.getUser().isLoginLinkPresent()){
             app.getUser().clickOnSignOutButton();
         }
+
         app.getUser().clickOnLoginLink();
         app.getUser().fillLoginRegisterForm(new User()
                 .setEmail(UserData.email)
                 .setPassword(UserData.password));
         app.getUser().clickOnLoginButton();
-    }
 
+    }
     @Test
     public void addContactWithInvalidPhoneTest(){
         app.getContact().clickOnAddLink();
         app.getContact().fillContactForm(new Contact()
                 .setName(ContactData.name)
-                .setLastname(ContactData.lastName)
-                .setPhone("234556789")
+                .setLastname(ContactData.lastname)
+                .setPhone("234567890")
                 .setEmail(ContactData.email)
                 .setAddress(ContactData.address)
-                .setDescription(ContactData.description ));
+                .setDescription(ContactData.description));
         app.getContact().clickOnSaveButton();
         Assert.assertTrue(app.getContact().isAlertPresent());
+
     }
 }

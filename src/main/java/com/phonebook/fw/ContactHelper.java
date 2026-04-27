@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static java.awt.SystemColor.text;
+
 public class ContactHelper extends BaseHelper {
     public ContactHelper(WebDriver driver) {
         super(driver);
@@ -39,7 +41,13 @@ public class ContactHelper extends BaseHelper {
     }
 
     public boolean isContactCreatedByText(String text) {
-        List<WebElement> contacts = driver.findElements(By.cssSelector("h2"));
+        if (verifyText(text, By.cssSelector("h2"))) return true;
+        return false;
+
+    }
+
+    public boolean verifyText(String text, By locator) {
+        List<WebElement> contacts = driver.findElements(locator);
         for(WebElement element:contacts){
             if(element.getText().contains(text))
                 return true;
@@ -60,4 +68,10 @@ public class ContactHelper extends BaseHelper {
         }
         return 0;
     }
+
+    public boolean verifyByNamePhone(String text) {
+        if (verifyText(text,By.cssSelector("h3"))) return true;
+        return false;
+    }
 }
+

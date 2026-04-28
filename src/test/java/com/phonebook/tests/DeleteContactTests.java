@@ -18,7 +18,7 @@ public class DeleteContactTests extends TestBase {
 
         app.getUser().clickOnLoginLink();
         app.getUser().fillLoginRegisterForm(new User()
-                .setEmail("jenny.klein001@mail.de")
+                .setEmail("kristitomash001@gmail.com")
                 .setPassword("Aa12345!"));
         app.getUser().clickOnLoginButton();
 
@@ -37,7 +37,7 @@ public class DeleteContactTests extends TestBase {
         int sizeBefore = app.getContact().sizeOfContacts();
 
         app.getContact().removeContact();
-        app.getContact().pause(500);
+        app.getContact().pause(1000);
         int sizeAfter = app.getContact().sizeOfContacts();
         Assert.assertEquals(sizeAfter,sizeBefore-1);
 

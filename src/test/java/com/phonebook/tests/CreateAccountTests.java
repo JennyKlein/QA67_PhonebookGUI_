@@ -12,8 +12,8 @@ import static com.phonebook.core.ApplicationManager.softAssert;
 public class CreateAccountTests extends TestBase {
 
     @BeforeMethod
-    public void ensurePrecondition(){
-        if (!app.getUser().isLoginLinkPresent()){
+    public void ensurePrecondition() {
+        if (!app.getUser().isLoginLinkPresent()) {
             app.getUser().clickOnSignOutButton();
         }
     }
@@ -38,10 +38,9 @@ public class CreateAccountTests extends TestBase {
                 .setEmail(UserData.email)
                 .setPassword(UserData.password));
         app.getUser().clickOnRegistrationButton();
-        //Assert.assertTrue(app.getUser().isAlertPresent());
+       // Assert.assertTrue(app.getUser().isAlertPresent());
         softAssert.assertTrue(app.getUser().isAlertPresent());
         softAssert.assertTrue(app.getUser().isErrorMessagePresent());
         softAssert.assertAll();
     }
-
 }
